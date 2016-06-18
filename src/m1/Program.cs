@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
@@ -23,6 +24,9 @@ namespace m1
 			{
 				tx.Commit();
 			}
+
+			Console.WriteLine("Press any key to continue.");
+			Console.Read();
 		}
 	}
 }
