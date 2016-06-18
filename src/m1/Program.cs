@@ -22,6 +22,11 @@ namespace m1
 			using (var session = sessionFactory.OpenSession())
 			using(var tx = session.BeginTransaction())
 			{
+				var customers = session.CreateCriteria<Customer>().List<Customer>();
+				foreach (var customer in customers)
+				{
+					Console.WriteLine("{0} {1}", customer.FirstName, customer.LastName);
+				}
 				tx.Commit();
 			}
 
