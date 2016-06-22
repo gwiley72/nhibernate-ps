@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
-using NHibernate.Linq;
 
 namespace m2
 {
@@ -21,21 +19,17 @@ namespace m2
 				x.LogSqlInConsole = true;
 			});
 			cfg.AddAssembly(Assembly.GetExecutingAssembly());
-			var sessionFactory = cfg.BuildSessionFactory();
 
+			var sessionFactory = cfg.BuildSessionFactory();
 			using (var session = sessionFactory.OpenSession())
 			using (var tx = session.BeginTransaction())
 			{
-				var query = from customer in session.Query<Customer>()
-					where customer.LastName == "Comacho"
-					select customer;
-				var c = query.First();
-				session.Delete(c);
+				var newCustomer = CreateCustomer();
+				session.Save(newCustomer);
 				tx.Commit();
 			}
-
-			Console.WriteLine("Press any key to continue.");
-			Console.Read();
+			Console.WriteLine("Press <ENTER> to exit...");
+			Console.ReadLine();
 		}
 
 		private static Customer CreateCustomer()

@@ -17,4 +17,9 @@ namespace m2
 			return $"Id: {Id}, FirstName: {FirstName}, LastName: {LastName}, Points: {Points}";
 		}
 	}
+
+	public enum CustomerCreditRating
+	{
+		Excellent, Good, Neutral, Poor, Terrible
+	}
 }
